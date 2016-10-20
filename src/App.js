@@ -1,21 +1,41 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { compose, bindActionCreators } from 'redux';
+
+
+const mapStateToProps = (state, ownProps) => ({
+  todos: state.todos,
+});
+
+const mapActionsToProps = (dispatch) => bindActionCreators({
+  // updateProduct: cartActions.updateProduct,
+}, dispatch);
 
 class App extends Component {
+  static propTypes = {
+    todos: PropTypes.array,
+  };
+
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <h1>TODO List</h1>
+
+        <ul>
+          { this.props.todos.map((todo, i) => {
+            return (
+              <li key={i}>
+                { todo.done && <span>[v]</span> }
+                <span>{ todo.label }</span>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     );
   }
 }
 
-export default App;
+export default compose(
+  connect(mapStateToProps, mapActionsToProps)
+)(App);
