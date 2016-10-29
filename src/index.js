@@ -1,4 +1,6 @@
 /* global document: true */
+/* global window: true */
+/* eslint no-underscore-dangle: 0 */
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -6,17 +8,13 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
 import App from './App';
-import { todoReducer } from './lib/todos';
+import todoReducer from './lib/todos';
 
 
-const initialState = {
-  todos: [{
-    label: 'my first todo',
-    done: true,
-  }],
-};
-
-const store = createStore(todoReducer, initialState);
+const store = createStore(
+  todoReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 const app = (
   <Provider store={store}>

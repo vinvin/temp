@@ -1,11 +1,15 @@
-import { createReducer } from 'redux-act';
+import { combineReducers } from 'redux';
+import { default as todos } from './todosReducer';
+import { default as visibilityFilter } from './visibilityFilterReducer';
 
 const initialState = {
-  todos: ['my first todo'],
+  todos: [],
+  visibilityFilter: '',
 };
 
-const todoReducer = createReducer({
-
+const todoReducer = combineReducers({
+  todos,
+  visibilityFilter,
 }, initialState);
 
-export { todoReducer };
+export default todoReducer;
