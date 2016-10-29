@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "title": "Write a TODO app",
+    "completed": true
+  },
+  {
+    "id": 2,
+    "title": "Use an API",
+    "completed": false
+  }
+]
